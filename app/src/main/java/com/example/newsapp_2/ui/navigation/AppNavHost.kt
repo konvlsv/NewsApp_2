@@ -1,4 +1,4 @@
-package com.example.newsapp_2
+package com.example.newsapp_2.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
@@ -7,4 +7,6 @@ import androidx.navigation.compose.rememberNavController
 fun AppNavHost() {
 
     val navController = rememberNavController()
+
+
 }
