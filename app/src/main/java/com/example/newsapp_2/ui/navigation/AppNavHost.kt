@@ -37,6 +37,4 @@ fun AppNavHost() {
             }
         }
     }
-
-
 }
