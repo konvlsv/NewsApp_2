@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.newsapp_2.ui.theme.NewsApp_2Theme
+import com.example.newsapp_2.ui.common.theme.NewsApp_2Theme
 
 @Composable
 fun ArticlesScreen(

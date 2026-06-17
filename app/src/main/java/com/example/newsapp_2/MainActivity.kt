@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.Surface
 import com.example.newsapp_2.ui.navigation.AppNavHost
-import com.example.newsapp_2.ui.theme.NewsApp_2Theme
+import com.example.newsapp_2.ui.common.theme.NewsApp_2Theme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
