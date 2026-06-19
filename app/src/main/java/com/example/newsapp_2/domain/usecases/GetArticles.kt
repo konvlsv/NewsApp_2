@@ -1,21 +1,14 @@
 package com.example.newsapp_2.domain.usecases
 
 import com.example.newsapp_2.domain.models.Article
+import com.example.newsapp_2.domain.repository.ArticleRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
-class GetArticles @Inject constructor() {
-    fun getArticlesStream(): Flow<List<Article>?>  {
-        val articles = listOf(
-            Article(1, "Article 1"),
-            Article(2, "Article 2"),
-            Article(3, "Article 3"),
-        )
-        return flowOf(articles)
-    }
+class GetArticles @Inject constructor(
+    private val articleRepository: ArticleRepository
+) {
+    fun getArticlesStream(): Flow<List<Article>?> = articleRepository.getArticlesStream()
 
-    suspend fun refreshArticles() {
-        // todo: refresh articles
-    }
+    suspend fun refreshArticles() = articleRepository.refreshArticles()
 }

@@ -16,7 +16,7 @@ import com.example.newsapp_2.ui.common.theme.NewsApp_2Theme
 
 @Composable
 fun ArticlesScreen(
-    onNavigateToDetails: (id: Int) -> Unit,
+    onNavigateToDetails: (id: String) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: ArticlesViewModel = hiltViewModel()
 ){
@@ -42,7 +42,7 @@ fun ArticlesScreen(
 fun ArticlesScreenContent(
     onRefresh: () -> Unit,
     isRefreshing: Boolean,
-    onNavigateToDetails: (id: Int) -> Unit,
+    onNavigateToDetails: (id: String) -> Unit,
     articles: List<Article>,
     modifier: Modifier = Modifier,
 ){
@@ -73,9 +73,9 @@ fun ArticlesScreenContentPreview(){
             onRefresh = {},
             isRefreshing = false,
             articles = listOf(
-                Article(1, "Article 1"),
-                Article(2, "Article 2"),
-                Article(3, "Article 3"),
+                Article("1", "Article 1"),
+                Article("2", "Article 2"),
+                Article("3", "Article 3"),
             )
         )
     }
