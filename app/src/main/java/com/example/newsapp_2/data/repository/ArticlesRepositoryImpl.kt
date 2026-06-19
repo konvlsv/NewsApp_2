@@ -28,6 +28,11 @@ class ArticlesRepositoryImpl @Inject constructor(
             e.printStackTrace()
         }
     }
+    override fun getArticleByIdStream(id: String): Flow<Article?> {
+        return articleDao.getArticleById(id).map {
+            it?.toArticle()
+        }
+    }
 }
 
 private fun ArticleDto.toArticleEntity(): ArticleEntity {

@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 interface ArticleRepository {
     fun getArticlesStream(): Flow<List<Article>?>
     suspend fun refreshArticles()
+    fun getArticleByIdStream(id: String): Flow<Article?>
 }

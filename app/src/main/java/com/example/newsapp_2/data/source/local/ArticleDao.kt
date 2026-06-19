@@ -14,4 +14,7 @@ interface ArticleDao {
 
     @Query("SELECT * FROM articles")
     fun getArticles(): Flow<List<ArticleEntity>?>
+
+    @Query("SELECT * FROM articles WHERE id = :id")
+    fun getArticleById(id: String): Flow<ArticleEntity?>
 }

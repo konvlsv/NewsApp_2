@@ -2,11 +2,14 @@ package com.example.newsapp_2.ui.detail
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.newsapp_2.domain.models.Article
 import com.example.newsapp_2.ui.common.theme.NewsApp_2Theme
 
 @Composable
@@ -15,20 +18,25 @@ fun DetailsScreen(
     modifier: Modifier = Modifier,
     viewModel: DetailsViewModel = hiltViewModel()
 ) {
-    val userId = viewModel.userId
+    val article = viewModel.article.collectAsState()
     Box(
         modifier = modifier
     ) {
-        DetailsScreenContent(
-            onBack = onBack,
-            userId = userId
-        )
+        val currentArticle = article.value
+        if (currentArticle == null) {
+            CircularProgressIndicator()
+        } else {
+            DetailsScreenContent(
+                onBack = onBack,
+                article = currentArticle
+            )
+        }
     }
 }
 
 @Composable
 fun DetailsScreenContent(
-    userId: String,
+    article: Article,
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -36,7 +44,10 @@ fun DetailsScreenContent(
         modifier = modifier
     ) {
         Text(
-            text = "User ID: $userId"
+            text = "Article ID: ${article.id}"
+        )
+        Text(
+            text = "Article Title: ${article.title}"
         )
     }
 }
@@ -47,7 +58,10 @@ fun DetailsScreenContentPreview() {
     NewsApp_2Theme() {
         DetailsScreenContent(
             onBack = {},
-            userId = "1"
+            article = Article(
+                id = "1",
+                title = "Article 1"
+            )
         )
     }
 }
