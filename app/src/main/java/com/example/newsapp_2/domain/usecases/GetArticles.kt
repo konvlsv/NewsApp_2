@@ -10,5 +10,5 @@ class GetArticles @Inject constructor(
 ) {
     fun getArticlesStream(): Flow<List<Article>?> = articleRepository.getArticlesStream()
 
-    suspend fun refreshArticles() = articleRepository.refreshArticles()
+    suspend fun refreshArticles(): Result<Unit> = articleRepository.refreshArticles()
 }

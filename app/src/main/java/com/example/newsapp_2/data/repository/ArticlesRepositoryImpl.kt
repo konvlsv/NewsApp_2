@@ -20,12 +20,13 @@ class ArticlesRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun refreshArticles() {
-        try {
+    override suspend fun refreshArticles(): Result<Unit> {
+        return try {
             val articleEntities = articleApiService.getArticles().results.toArticleEntities()
             articleDao.insertArticles(articleEntities)
+            Result.success(Unit)
         }catch (e: Exception){
-            e.printStackTrace()
+            Result.failure(e)
         }
     }
     override fun getArticleByIdStream(id: String): Flow<Article?> {
