@@ -2,8 +2,8 @@ package com.example.newsapp_2.data.repository
 
 import com.example.newsapp_2.data.source.local.ArticleDao
 import com.example.newsapp_2.data.source.local.ArticleEntity
-import com.example.newsapp_2.data.source.remote.ArticleApiService
-import com.example.newsapp_2.data.source.remote.ArticleDto
+import com.example.newsapp_2.data.source.network.retrofit.RetrofitArticlesApi
+import com.example.newsapp_2.data.network.model.NetworkArticle
 import com.example.newsapp_2.domain.models.Article
 import com.example.newsapp_2.domain.repository.ArticleRepository
 import kotlinx.coroutines.flow.Flow
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class ArticlesRepositoryImpl @Inject constructor(
     private val articleDao: ArticleDao,
-    private val articleApiService: ArticleApiService
+    private val articleApiService: RetrofitArticlesApi
 ): ArticleRepository {
     override fun getArticlesStream(): Flow<List<Article>?> {
         return articleDao.getArticles().map {
@@ -36,14 +36,14 @@ class ArticlesRepositoryImpl @Inject constructor(
     }
 }
 
-private fun ArticleDto.toArticleEntity(): ArticleEntity {
+private fun NetworkArticle.toArticleEntity(): ArticleEntity {
     return ArticleEntity(
         id = id,
         title = title
     )
 }
 
-private fun List<ArticleDto>.toArticleEntities(): List<ArticleEntity> {
+private fun List<NetworkArticle>.toArticleEntities(): List<ArticleEntity> {
     return map { it.toArticleEntity() }
 }
 

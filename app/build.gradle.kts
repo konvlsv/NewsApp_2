@@ -88,4 +88,7 @@ dependencies {
 
     // Coil
     implementation(libs.coil.compose)
+
+    // Tracing
+    implementation(libs.androidx.tracing.ktx)
 }
