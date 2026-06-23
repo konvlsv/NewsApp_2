@@ -1,9 +1,9 @@
 package com.example.newsapp_2.data.repository
 
+import com.example.newsapp_2.data.network.NewsNetworkDataSource
+import com.example.newsapp_2.data.network.model.NetworkArticle
 import com.example.newsapp_2.data.source.local.ArticleDao
 import com.example.newsapp_2.data.source.local.ArticleEntity
-import com.example.newsapp_2.data.source.network.retrofit.RetrofitArticlesApi
-import com.example.newsapp_2.data.network.model.NetworkArticle
 import com.example.newsapp_2.domain.models.Article
 import com.example.newsapp_2.domain.repository.ArticleRepository
 import kotlinx.coroutines.flow.Flow
@@ -12,8 +12,8 @@ import javax.inject.Inject
 
 class ArticlesRepositoryImpl @Inject constructor(
     private val articleDao: ArticleDao,
-    private val articleApiService: RetrofitArticlesApi
-): ArticleRepository {
+    private val network: NewsNetworkDataSource
+) : ArticleRepository {
     override fun getArticlesStream(): Flow<List<Article>?> {
         return articleDao.getArticles().map {
             it?.toArticles()
@@ -22,13 +22,14 @@ class ArticlesRepositoryImpl @Inject constructor(
 
     override suspend fun refreshArticles(): Result<Unit> {
         return try {
-            val articleEntities = articleApiService.getArticles().results.toArticleEntities()
+            val articleEntities = network.getArticles().toArticleEntities()
             articleDao.insertArticles(articleEntities)
             Result.success(Unit)
-        }catch (e: Exception){
+        } catch (e: Exception) {
             Result.failure(e)
         }
     }
+
     override fun getArticleByIdStream(id: String): Flow<Article?> {
         return articleDao.getArticleById(id).map {
             it?.toArticle()

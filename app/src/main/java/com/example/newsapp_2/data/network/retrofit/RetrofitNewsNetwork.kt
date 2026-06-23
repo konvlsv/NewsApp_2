@@ -1,6 +1,7 @@
 package com.example.newsapp_2.data.network.retrofit
 
 import androidx.tracing.trace
+import com.example.newsapp_2.BuildConfig
 import com.example.newsapp_2.data.network.NewsNetworkDataSource
 import com.example.newsapp_2.data.network.model.NetworkArticle
 import com.example.newsapp_2.data.network.model.NetworkNews
