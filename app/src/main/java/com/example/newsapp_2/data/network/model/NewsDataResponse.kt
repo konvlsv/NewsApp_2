@@ -14,18 +14,18 @@ data class NewsDataResponse(
 @Serializable
 data class NetworkArticle(
     @SerialName("article_id")
-    val id: String,
-    val link: String,
-    val title: String,
-    val description: String,
-    val keywords: List<String>,
-    val creator: List<String>,
-    val language: String,
-    val country: List<String>,
-    val category: List<String>,
-    val pubDate: String,
+    val id: String? = null,
+    val link: String? = null,
+    val title: String? = null,
+    val description: String? = null,
+    val keywords: List<String>? = null,
+    val creator: List<String>? = null,
+    val language: String? = null,
+    val country: List<String>? = null,
+    val category: List<String>? = null,
+    val pubDate: String? = null,
     @SerialName("image_url")
-    val imageUrl: String,
+    val imageUrl: String? = null,
     @SerialName("source_name")
-    val sourceName: String,
+    val sourceName: String? = null,
 )
