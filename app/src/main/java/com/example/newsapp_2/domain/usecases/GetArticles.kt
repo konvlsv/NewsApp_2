@@ -8,7 +8,7 @@ import javax.inject.Inject
 class GetArticles @Inject constructor(
     private val articleRepository: ArticleRepository
 ) {
-    fun getArticlesStream(): Flow<List<Article>?> = articleRepository.getArticlesStream()
+    fun getArticlesStream(): Flow<List<Article>> = articleRepository.getArticlesStream()
 
     suspend fun refreshArticles(): Result<Unit> = articleRepository.refreshArticles()
 }

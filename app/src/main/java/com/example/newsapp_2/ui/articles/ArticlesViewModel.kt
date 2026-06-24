@@ -19,11 +19,11 @@ import javax.inject.Inject
 class ArticlesViewModel @Inject constructor(
     private val getArticles: GetArticles
 ): ViewModel() {
-    val userState: StateFlow<List<Article>?> = getArticles.getArticlesStream()
+    val userState: StateFlow<List<Article>> = getArticles.getArticlesStream()
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
-            initialValue = null
+            initialValue = emptyList()
         )
 
     private val _isRefreshing = MutableStateFlow(false)

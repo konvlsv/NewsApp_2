@@ -4,7 +4,6 @@ import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
@@ -17,7 +16,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.newsapp_2.domain.models.Article
-import com.example.newsapp_2.ui.common.components.ErrorScreen
 import com.example.newsapp_2.ui.common.components.LoadingScreen
 import com.example.newsapp_2.ui.common.theme.NewsApp_2Theme
 
@@ -39,8 +37,9 @@ fun ArticlesScreen(
     Box(
         modifier = modifier
     ) {
-        when (val currentArticles = articles.value) {
-            null -> LoadingScreen()
+        val currentArticles = articles.value
+        when {
+            currentArticles.isEmpty() -> LoadingScreen()
             else -> {
                 ArticlesScreenContent(
                     onNavigateToDetails = onNavigateToDetails,

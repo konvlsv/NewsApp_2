@@ -14,7 +14,7 @@ class ArticlesRepositoryImpl @Inject constructor(
     private val newsDao: NewsDao,
     private val network: NewsNetworkDataSource
 ) : ArticleRepository {
-    override fun getArticlesStream(): Flow<List<Article>?> {
+    override fun getArticlesStream(): Flow<List<Article>> {
         return newsDao.getArticles().map {
             it.toArticles()
         }
@@ -45,14 +45,7 @@ private fun List<NetworkArticle>.toArticleEntities(): List<ArticleEntity> {
                     && !networkArticle.link.isNullOrBlank()
                     && !networkArticle.title.isNullOrBlank()
                     && !networkArticle.description.isNullOrBlank()
-                    && !networkArticle.keywords.isNullOrEmpty()
-                    && !networkArticle.creator.isNullOrEmpty()
-                    && !networkArticle.language.isNullOrBlank()
-                    && !networkArticle.country.isNullOrEmpty()
-                    && !networkArticle.category.isNullOrEmpty()
-                    && !networkArticle.pubDate.isNullOrBlank()
                     && !networkArticle.imageUrl.isNullOrBlank()
-                    && !networkArticle.sourceName.isNullOrBlank()
         }
         .map { networkArticle ->
             ArticleEntity(
@@ -60,14 +53,14 @@ private fun List<NetworkArticle>.toArticleEntities(): List<ArticleEntity> {
                 link = networkArticle.link!!,
                 title = networkArticle.title!!,
                 description = networkArticle.description!!,
-                keywords = networkArticle.keywords!!,
-                creator = networkArticle.creator!!,
-                language = networkArticle.language!!,
-                country = networkArticle.country!!,
-                category = networkArticle.category!!,
-                pubDate = networkArticle.pubDate!!,
+                keywords = networkArticle.keywords ?: emptyList(),
+                creator = networkArticle.creator ?: emptyList(),
+                language = networkArticle.language ?: "",
+                country = networkArticle.country ?: emptyList(),
+                category = networkArticle.category ?: emptyList(),
+                pubDate = networkArticle.pubDate ?: "",
                 imageUrl = networkArticle.imageUrl!!,
-                sourceName = networkArticle.sourceName!!,
+                sourceName = networkArticle.sourceName ?: ""
             )
         }
 }
