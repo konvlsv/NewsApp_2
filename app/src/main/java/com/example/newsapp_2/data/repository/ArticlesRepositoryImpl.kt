@@ -1,9 +1,9 @@
 package com.example.newsapp_2.data.repository
 
+import com.example.newsapp_2.data.database.dao.NewsDao
+import com.example.newsapp_2.data.database.model.ArticleEntity
 import com.example.newsapp_2.data.network.NewsNetworkDataSource
 import com.example.newsapp_2.data.network.model.NetworkArticle
-import com.example.newsapp_2.data.source.local.ArticleDao
-import com.example.newsapp_2.data.source.local.ArticleEntity
 import com.example.newsapp_2.domain.models.Article
 import com.example.newsapp_2.domain.repository.ArticleRepository
 import kotlinx.coroutines.flow.Flow
@@ -11,11 +11,11 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class ArticlesRepositoryImpl @Inject constructor(
-    private val articleDao: ArticleDao,
+    private val newsDao: NewsDao,
     private val network: NewsNetworkDataSource
 ) : ArticleRepository {
     override fun getArticlesStream(): Flow<List<Article>?> {
-        return articleDao.getArticles().map {
+        return newsDao.getArticles().map {
             it?.toArticles()
         }
     }
@@ -23,7 +23,7 @@ class ArticlesRepositoryImpl @Inject constructor(
     override suspend fun refreshArticles(): Result<Unit> {
         return try {
             val articleEntities = network.getArticles().toArticleEntities()
-            articleDao.insertArticles(articleEntities)
+            newsDao.insertArticles(articleEntities)
             Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)
@@ -31,21 +31,45 @@ class ArticlesRepositoryImpl @Inject constructor(
     }
 
     override fun getArticleByIdStream(id: String): Flow<Article?> {
-        return articleDao.getArticleById(id).map {
+        return newsDao.getArticleById(id).map {
             it?.toArticle()
         }
     }
 }
 
-private fun NetworkArticle.toArticleEntity(): ArticleEntity {
-    return ArticleEntity(
-        id = id,
-        title = title
-    )
-}
 
 private fun List<NetworkArticle>.toArticleEntities(): List<ArticleEntity> {
-    return map { it.toArticleEntity() }
+    return this
+        .filter { networkArticle ->
+            !networkArticle.id.isNullOrBlank()
+                    && !networkArticle.link.isNullOrBlank()
+                    && !networkArticle.title.isNullOrBlank()
+                    && !networkArticle.description.isNullOrBlank()
+                    && !networkArticle.keywords.isNullOrEmpty()
+                    && !networkArticle.creator.isNullOrEmpty()
+                    && !networkArticle.language.isNullOrBlank()
+                    && !networkArticle.country.isNullOrEmpty()
+                    && !networkArticle.category.isNullOrEmpty()
+                    && !networkArticle.pubDate.isNullOrBlank()
+                    && !networkArticle.imageUrl.isNullOrBlank()
+                    && !networkArticle.sourceName.isNullOrBlank()
+        }
+        .map { networkArticle ->
+            ArticleEntity(
+                id = networkArticle.id!!,
+                link = networkArticle.link!!,
+                title = networkArticle.title!!,
+                description = networkArticle.description!!,
+                keywords = networkArticle.keywords!!,
+                creator = networkArticle.creator!!,
+                language = networkArticle.language!!,
+                country = networkArticle.country!!,
+                category = networkArticle.category!!,
+                pubDate = networkArticle.pubDate!!,
+                imageUrl = networkArticle.imageUrl!!,
+                sourceName = networkArticle.sourceName!!,
+            )
+        }
 }
 
 private fun List<ArticleEntity>.toArticles(): List<Article> {
@@ -55,6 +79,16 @@ private fun List<ArticleEntity>.toArticles(): List<Article> {
 private fun ArticleEntity.toArticle(): Article {
     return Article(
         id = id,
-        title = title
+        link = link,
+        title = title,
+        description = description,
+        keywords = keywords,
+        creator = creator,
+        language = language,
+        country = country,
+        category = category,
+        pubDate = pubDate,
+        imageUrl = imageUrl,
+        sourceName = sourceName,
     )
 }

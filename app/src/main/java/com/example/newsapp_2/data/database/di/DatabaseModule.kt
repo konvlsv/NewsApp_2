@@ -1,9 +1,9 @@
-package com.example.newsapp_2.hilt
+package com.example.newsapp_2.data.database.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.newsapp_2.data.source.local.AppDatabase
-import com.example.newsapp_2.data.source.local.ArticleDao
+import com.example.newsapp_2.data.database.NewsDatabase
+import com.example.newsapp_2.data.database.dao.NewsDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,19 +17,19 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideAppDatabase(
+    fun provideNewsDatabase(
         @ApplicationContext context: Context
-    ): AppDatabase{
+    ): NewsDatabase{
         return Room.databaseBuilder(
             context,
-            AppDatabase::class.java,
+            NewsDatabase::class.java,
             "app_database"
         ).build()
     }
 
     @Provides
     @Singleton
-    fun provideArticleDao(appDatabase: AppDatabase): ArticleDao{
-        return appDatabase.articleDao
+    fun provideNewsDao(newsDatabase: NewsDatabase): NewsDao{
+        return newsDatabase.newsDao
     }
 }

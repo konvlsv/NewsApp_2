@@ -1,6 +1,11 @@
-package com.example.newsapp_2.domain.models
+package com.example.newsapp_2.data.database.model
 
-data class Article(
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "articles")
+data class ArticleEntity(
+    @PrimaryKey(autoGenerate = false)
     val id: String,
     val link: String,
     val title: String,

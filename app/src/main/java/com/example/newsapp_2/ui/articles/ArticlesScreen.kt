@@ -88,9 +88,20 @@ fun ArticlesScreenContentPreview() {
             onRefresh = {},
             isRefreshing = false,
             articles = listOf(
-                Article("1", "Article 1"),
-                Article("2", "Article 2"),
-                Article("3", "Article 3"),
+                Article(
+                    id = "1",
+                    link = "link",
+                    title = "title",
+                    description = "description",
+                    keywords = listOf("keyword"),
+                    creator = listOf("creator"),
+                    language = "language",
+                    country = listOf("country"),
+                    category = listOf("category"),
+                    pubDate = "pubDate",
+                    imageUrl = "imageUrl",
+                    sourceName = "sourceName"
+                )
             )
         )
     }

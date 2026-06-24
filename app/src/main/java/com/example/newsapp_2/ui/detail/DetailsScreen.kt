@@ -60,7 +60,17 @@ fun DetailsScreenContentPreview() {
             onBack = {},
             article = Article(
                 id = "1",
-                title = "Article 1"
+                link = "link",
+                title = "title",
+                description = "description",
+                keywords = listOf("keyword"),
+                creator = listOf("creator"),
+                language = "language",
+                country = listOf("country"),
+                category = listOf("category"),
+                pubDate = "pubDate",
+                imageUrl = "imageUrl",
+                sourceName = "sourceName"
             )
         )
     }
