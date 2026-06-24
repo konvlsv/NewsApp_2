@@ -16,7 +16,7 @@ class ArticlesRepositoryImpl @Inject constructor(
 ) : ArticleRepository {
     override fun getArticlesStream(): Flow<List<Article>?> {
         return newsDao.getArticles().map {
-            it?.toArticles()
+            it.toArticles()
         }
     }
 
