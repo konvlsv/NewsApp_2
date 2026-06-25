@@ -1,7 +1,7 @@
 package com.example.newsapp_2.hilt
 
-import com.example.newsapp_2.data.repository.ArticlesRepositoryImpl
-import com.example.newsapp_2.domain.repository.ArticleRepository
+import com.example.newsapp_2.data.repository.NewsRepositoryImpl
+import com.example.newsapp_2.domain.repository.NewsRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,7 +14,7 @@ abstract class RepositoryModule {
 
     @Binds
     @Singleton
-    abstract fun bindArticleRepository(
-        articlesRepositoryImpl: ArticlesRepositoryImpl
-    ): ArticleRepository
+    abstract fun bindNewsRepository(
+        newsRepositoryImpl: NewsRepositoryImpl
+    ): NewsRepository
 }

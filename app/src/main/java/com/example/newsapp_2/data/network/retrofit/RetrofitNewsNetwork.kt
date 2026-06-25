@@ -18,7 +18,7 @@ import javax.inject.Singleton
 
 private interface RetrofitArticlesApi {
     @GET("api/1/latest")
-    suspend fun getArticles(
+    suspend fun getNews(
         @Query("apikey") apiKey: String
     ): NewsDataResponse
 }
@@ -43,6 +43,6 @@ internal class RetrofitNewsNetwork @Inject constructor(
             .create(RetrofitArticlesApi::class.java)
     }
 
-    override suspend fun getArticles(): List<NetworkArticle> =
-        networkApi.getArticles(apiKey = API_KEY).results
+    override suspend fun getNews(): List<NetworkArticle> =
+        networkApi.getNews(apiKey = API_KEY).results
 }

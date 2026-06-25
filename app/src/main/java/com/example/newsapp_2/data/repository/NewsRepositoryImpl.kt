@@ -5,24 +5,24 @@ import com.example.newsapp_2.data.database.model.ArticleEntity
 import com.example.newsapp_2.data.network.NewsNetworkDataSource
 import com.example.newsapp_2.data.network.model.NetworkArticle
 import com.example.newsapp_2.domain.models.Article
-import com.example.newsapp_2.domain.repository.ArticleRepository
+import com.example.newsapp_2.domain.repository.NewsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class ArticlesRepositoryImpl @Inject constructor(
+class NewsRepositoryImpl @Inject constructor(
     private val newsDao: NewsDao,
     private val network: NewsNetworkDataSource
-) : ArticleRepository {
-    override fun getArticlesStream(): Flow<List<Article>> {
-        return newsDao.getArticles().map {
+) : NewsRepository {
+    override fun getNewsStream(): Flow<List<Article>> {
+        return newsDao.getAllNews().map {
             it.toArticles()
         }
     }
 
-    override suspend fun refreshArticles(): Result<Unit> {
+    override suspend fun refreshNews(): Result<Unit> {
         return try {
-            val articleEntities = network.getArticles().toArticleEntities()
+            val articleEntities = network.getNews().toArticleEntities()
             newsDao.insertArticles(articleEntities)
             Result.success(Unit)
         } catch (e: Exception) {

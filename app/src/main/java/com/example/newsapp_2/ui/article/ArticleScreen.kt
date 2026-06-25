@@ -1,4 +1,4 @@
-package com.example.newsapp_2.ui.detail
+package com.example.newsapp_2.ui.article
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,7 +16,7 @@ import com.example.newsapp_2.ui.common.theme.NewsApp_2Theme
 fun DetailsScreen(
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: DetailsViewModel = hiltViewModel()
+    viewModel: ArticleViewModel = hiltViewModel()
 ) {
     val article = viewModel.article.collectAsState()
     Box(

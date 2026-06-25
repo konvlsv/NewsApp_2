@@ -1,4 +1,4 @@
-package com.example.newsapp_2.ui.articles
+package com.example.newsapp_2.ui.news
 
 import android.widget.Toast
 import androidx.compose.foundation.clickable
@@ -23,7 +23,7 @@ import com.example.newsapp_2.ui.common.theme.NewsApp_2Theme
 fun ArticlesScreen(
     onNavigateToDetails: (id: String) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: ArticlesViewModel = hiltViewModel()
+    viewModel: NewsViewModel = hiltViewModel()
 ) {
     val articles = viewModel.userState.collectAsState()
     val isRefreshing by viewModel.isRefreshing.collectAsStateWithLifecycle()

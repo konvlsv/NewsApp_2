@@ -13,7 +13,7 @@ interface NewsDao {
     suspend fun insertArticles(articles: List<ArticleEntity>)
 
     @Query("SELECT * FROM articles")
-    fun getArticles(): Flow<List<ArticleEntity>>
+    fun getAllNews(): Flow<List<ArticleEntity>>
 
     @Query("SELECT * FROM articles WHERE id = :id")
     fun getArticleById(id: String): Flow<ArticleEntity?>

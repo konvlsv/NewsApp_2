@@ -1,4 +1,4 @@
-package com.example.newsapp_2.ui.detail
+package com.example.newsapp_2.ui.article
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailsViewModel @Inject constructor(
+class ArticleViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     getArticle: GetArticle
 ) : ViewModel() {

@@ -8,8 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.newsapp_2.ui.articles.ArticlesScreen
-import com.example.newsapp_2.ui.detail.DetailsScreen
+import com.example.newsapp_2.ui.news.ArticlesScreen
+import com.example.newsapp_2.ui.article.DetailsScreen
 
 @Composable
 fun AppNavHost() {
