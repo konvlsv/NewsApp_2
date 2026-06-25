@@ -1,10 +1,9 @@
 package com.example.newsapp_2.ui.news
 
 import android.widget.Toast
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -63,16 +62,17 @@ fun ArticlesScreenContent(
 ) {
     PullToRefreshBox(
         isRefreshing = isRefreshing,
-        modifier = modifier,
+        modifier = modifier.fillMaxSize(),
         onRefresh = onRefresh
     ) {
-        LazyColumn() {
+        LazyColumn(
+            modifier = Modifier.fillMaxSize()
+        ) {
             items(articles.size) { index ->
-                Text(
-                    text = articles[index].title,
-                    modifier = Modifier.clickable {
-                        onNavigateToDetails(articles[index].id)
-                    }
+                ArticleCard(
+                    article = articles[index],
+                    onOpenInBrowser = { },
+                    onOpenDetails = { onNavigateToDetails(articles[index].id) },
                 )
             }
         }
