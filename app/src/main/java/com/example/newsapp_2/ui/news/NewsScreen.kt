@@ -17,6 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.newsapp_2.domain.models.Article
 import com.example.newsapp_2.ui.common.components.LoadingScreen
+import com.example.newsapp_2.ui.common.preview.getPreviewNews
 import com.example.newsapp_2.ui.common.theme.NewsApp_2Theme
 
 @Composable
@@ -86,50 +87,7 @@ fun ArticlesScreenContentPreview() {
             onNavigateToDetails = {},
             onRefresh = {},
             isRefreshing = false,
-            articles = listOf(
-                Article(
-                    id = "1",
-                    link = "link",
-                    title = "title",
-                    description = "description",
-                    keywords = listOf("keyword"),
-                    creator = listOf("creator"),
-                    language = "language",
-                    country = listOf("country"),
-                    category = listOf("category"),
-                    pubDate = "pubDate",
-                    imageUrl = "imageUrl",
-                    sourceName = "sourceName"
-                ),
-                Article(
-                    id = "1",
-                    link = "link",
-                    title = "title",
-                    description = "description",
-                    keywords = listOf("keyword"),
-                    creator = listOf("creator"),
-                    language = "language",
-                    country = listOf("country"),
-                    category = listOf("category"),
-                    pubDate = "pubDate",
-                    imageUrl = "imageUrl",
-                    sourceName = "sourceName"
-                ),
-                Article(
-                    id = "1",
-                    link = "link",
-                    title = "title",
-                    description = "description",
-                    keywords = listOf("keyword"),
-                    creator = listOf("creator"),
-                    language = "language",
-                    country = listOf("country"),
-                    category = listOf("category"),
-                    pubDate = "pubDate",
-                    imageUrl = "imageUrl",
-                    sourceName = "sourceName"
-                ),
-            )
+            articles = getPreviewNews()
         )
     }
 }
