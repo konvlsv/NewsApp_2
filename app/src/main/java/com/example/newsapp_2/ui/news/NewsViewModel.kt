@@ -3,7 +3,7 @@ package com.example.newsapp_2.ui.news
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newsapp_2.domain.models.Article
-import com.example.newsapp_2.domain.usecases.GetNews
+import com.example.newsapp_2.domain.usecases.GetNewsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,9 +17,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NewsViewModel @Inject constructor(
-    private val getNews: GetNews
+    private val getNewsUseCase: GetNewsUseCase
 ): ViewModel() {
-    val userState: StateFlow<List<Article>> = getNews.getNewsStream()
+    val userState: StateFlow<List<Article>> = getNewsUseCase.getNewsStream()
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
@@ -35,7 +35,7 @@ class NewsViewModel @Inject constructor(
     fun refreshArticles() {
         viewModelScope.launch {
             _isRefreshing.value = true
-            getNews.refreshNews()
+            getNewsUseCase.refreshNews()
                 .onSuccess {
                     _isRefreshing.value = false
                 }.onFailure {exception ->
@@ -50,7 +50,7 @@ class NewsViewModel @Inject constructor(
     }
     init {
         viewModelScope.launch {
-            getNews.refreshNews()
+            getNewsUseCase.refreshNews()
         }
     }
 }

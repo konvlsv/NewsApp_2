@@ -5,7 +5,7 @@ import com.example.newsapp_2.domain.repository.NewsRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetNews @Inject constructor(
+class GetNewsUseCase @Inject constructor(
     private val newsRepository: NewsRepository
 ) {
     fun getNewsStream(): Flow<List<Article>> = newsRepository.getNewsStream()

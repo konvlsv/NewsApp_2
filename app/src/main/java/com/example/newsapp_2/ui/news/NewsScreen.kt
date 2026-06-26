@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.newsapp_2.domain.models.Article
+import com.example.newsapp_2.domain.models.NewsCategory
 import com.example.newsapp_2.ui.common.components.LoadingScreen
 import com.example.newsapp_2.ui.common.preview.getPreviewNews
 import com.example.newsapp_2.ui.common.theme.NewsApp_2Theme
@@ -43,7 +44,9 @@ fun ArticlesScreen(
                 ArticlesScreenContent(
                     articles = currentArticles,
                     onRefresh = viewModel::refreshArticles,
-                    isRefreshing = isRefreshing
+                    isRefreshing = isRefreshing,
+                    selectedCategory = NewsCategory.ALL,
+                    onCategorySelected = {}
                 )
             }
         }
@@ -55,6 +58,8 @@ fun ArticlesScreenContent(
     onRefresh: () -> Unit,
     isRefreshing: Boolean,
     articles: List<Article>,
+    selectedCategory: NewsCategory,
+    onCategorySelected: (NewsCategory) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     PullToRefreshBox(
@@ -65,6 +70,12 @@ fun ArticlesScreenContent(
         LazyColumn(
             modifier = Modifier.fillMaxSize()
         ) {
+            item {
+                CategoriesTabs(
+                    selectedCategory = selectedCategory,
+                    onCategorySelected = onCategorySelected
+                )
+            }
             items(articles.size) { index ->
                 ArticleCard(
                     article = articles[index],
@@ -82,7 +93,9 @@ fun ArticlesScreenContentPreview() {
         ArticlesScreenContent(
             onRefresh = {},
             isRefreshing = false,
-            articles = getPreviewNews()
+            articles = getPreviewNews(),
+            selectedCategory = NewsCategory.ALL,
+            onCategorySelected = {}
         )
     }
 }
