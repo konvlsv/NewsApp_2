@@ -10,4 +10,24 @@
     <string name="search">Search</string>
     <string name="clear">Clear</string>
     <string name="share_title">Share article</string>
+
+    <string name="category_all">all</string>
+    <string name="category_breaking">breaking</string>
+    <string name="category_business">business</string>
+    <string name="category_crime">crime</string>
+    <string name="category_domestic">domestic</string>
+    <string name="category_education">education</string>
+    <string name="category_entertainment">entertainment</string>
+    <string name="category_environment">environment</string>
+    <string name="category_food">food</string>
+    <string name="category_health">health</string>
+    <string name="category_lifestyle">lifestyle</string>
+    <string name="category_politics">politics</string>
+    <string name="category_science">science</string>
+    <string name="category_sports">sports</string>
+    <string name="category_technology">technology</string>
+    <string name="category_top">top</string>
+    <string name="category_tourism">tourism</string>
+    <string name="category_world">world</string>
+    <string name="category_other">other</string>
 </resources>
