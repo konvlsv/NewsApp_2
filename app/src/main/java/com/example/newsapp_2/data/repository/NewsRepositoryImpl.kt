@@ -39,30 +39,37 @@ class NewsRepositoryImpl @Inject constructor(
 
 
 private fun List<NetworkArticle>.toArticleEntities(): List<ArticleEntity> {
-    return this
-        .filter { networkArticle ->
-            !networkArticle.id.isNullOrBlank()
-                    && !networkArticle.link.isNullOrBlank()
-                    && !networkArticle.title.isNullOrBlank()
-                    && !networkArticle.description.isNullOrBlank()
-                    && !networkArticle.imageUrl.isNullOrBlank()
+    return this.mapNotNull { networkArticle ->
+        val id = networkArticle.id
+        val link = networkArticle.link
+        val title = networkArticle.title
+        val description = networkArticle.description
+        val imageUrl = networkArticle.imageUrl
+
+        if (id.isNullOrBlank() ||
+            link.isNullOrBlank() ||
+            title.isNullOrBlank() ||
+            description.isNullOrBlank() ||
+            imageUrl.isNullOrBlank()
+        ) {
+            return@mapNotNull null
         }
-        .map { networkArticle ->
-            ArticleEntity(
-                id = networkArticle.id!!,
-                link = networkArticle.link!!,
-                title = networkArticle.title!!,
-                description = networkArticle.description!!,
-                keywords = networkArticle.keywords ?: emptyList(),
-                creator = networkArticle.creator ?: emptyList(),
-                language = networkArticle.language ?: "",
-                country = networkArticle.country ?: emptyList(),
-                category = networkArticle.category ?: emptyList(),
-                pubDate = networkArticle.pubDate ?: "",
-                imageUrl = networkArticle.imageUrl!!,
-                sourceName = networkArticle.sourceName ?: ""
-            )
-        }
+
+        ArticleEntity(
+            id = id,
+            link = link,
+            title = title,
+            description = description,
+            keywords = networkArticle.keywords ?: emptyList(),
+            creator = networkArticle.creator ?: emptyList(),
+            language = networkArticle.language ?: "",
+            country = networkArticle.country ?: emptyList(),
+            category = networkArticle.category ?: emptyList(),
+            pubDate = networkArticle.pubDate ?: "",
+            imageUrl = imageUrl,
+            sourceName = networkArticle.sourceName ?: ""
+        )
+    }
 }
 
 private fun List<ArticleEntity>.toArticles(): List<Article> {
