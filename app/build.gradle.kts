@@ -92,4 +92,7 @@ dependencies {
 
     // Tracing
     implementation(libs.androidx.tracing.ktx)
+
+    // Icons
+    implementation(libs.androidx.compose.material.iconsExtended)
 }
