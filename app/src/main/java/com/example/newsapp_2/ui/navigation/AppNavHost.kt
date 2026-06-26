@@ -9,7 +9,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.newsapp_2.ui.news.ArticlesScreen
-import com.example.newsapp_2.ui.article.DetailsScreen
 
 @Composable
 fun AppNavHost() {
@@ -22,18 +21,9 @@ fun AppNavHost() {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-        ){
-            composable<Screens.Articles>{
-                ArticlesScreen(
-                    onNavigateToDetails = { id ->
-                        navController.navigate(Screens.Details(id))
-                    }
-                )
-            }
-            composable<Screens.Details>{
-                DetailsScreen(
-                    onBack = { navController.popBackStack() }
-                )
+        ) {
+            composable<Screens.Articles> {
+                ArticlesScreen()
             }
         }
     }

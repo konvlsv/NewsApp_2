@@ -18,7 +18,6 @@ import com.example.newsapp_2.ui.common.theme.AppTheme
 fun ArticleCard(
     article: Article,
     onOpenInBrowser: () -> Unit,
-    onOpenDetails: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -35,9 +34,6 @@ fun ArticleCard(
         Button(onClick = onOpenInBrowser) {
             Text(text = "Open in browser")
         }
-        Button(onClick = onOpenDetails) {
-            Text(text = "Open details")
-        }
     }
 }
 
@@ -47,6 +43,5 @@ fun ArticleCardPreview() {
     ArticleCard(
         article = getPreviewArticle(),
         onOpenInBrowser = {},
-        onOpenDetails = {}
     )
 }

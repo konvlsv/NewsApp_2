@@ -21,7 +21,6 @@ import com.example.newsapp_2.ui.common.theme.NewsApp_2Theme
 
 @Composable
 fun ArticlesScreen(
-    onNavigateToDetails: (id: String) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: NewsViewModel = hiltViewModel()
 ) {
@@ -42,7 +41,6 @@ fun ArticlesScreen(
             currentArticles.isEmpty() -> LoadingScreen()
             else -> {
                 ArticlesScreenContent(
-                    onNavigateToDetails = onNavigateToDetails,
                     articles = currentArticles,
                     onRefresh = viewModel::refreshArticles,
                     isRefreshing = isRefreshing
@@ -56,7 +54,6 @@ fun ArticlesScreen(
 fun ArticlesScreenContent(
     onRefresh: () -> Unit,
     isRefreshing: Boolean,
-    onNavigateToDetails: (id: String) -> Unit,
     articles: List<Article>,
     modifier: Modifier = Modifier,
 ) {
@@ -72,7 +69,6 @@ fun ArticlesScreenContent(
                 ArticleCard(
                     article = articles[index],
                     onOpenInBrowser = { },
-                    onOpenDetails = { onNavigateToDetails(articles[index].id) },
                 )
             }
         }
@@ -84,7 +80,6 @@ fun ArticlesScreenContent(
 fun ArticlesScreenContentPreview() {
     NewsApp_2Theme() {
         ArticlesScreenContent(
-            onNavigateToDetails = {},
             onRefresh = {},
             isRefreshing = false,
             articles = getPreviewNews()
