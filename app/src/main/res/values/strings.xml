@@ -1,12 +1,13 @@
 <resources>
     <string name="app_name">NewsApp</string>
-    <string name="news_list_screen">News</string>
     <string name="open_in_browser">Open in browser</string>
     <string name="share">Share</string>
     <string name="article_picture">Article picture</string>
     <string name="search">Search</string>
     <string name="clear">Clear</string>
-    <string name="share_title">Share article</string>
+
+    <string name="news_screen_title">News</string>
+    <string name="subscribe_screen_title">Subscribe</string>
 
     <string name="no_internet_connection">Нет подключения к интернету</string>">
     <string name="error_loading_news">Не удалось загрузить новости</string>
