@@ -29,6 +29,8 @@ secretsPlugin = "2.0.1"
 
 tracingKtx = "1.3.0"
 
+kotlinxDatetime = "0.8.0"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -83,6 +85,9 @@ androidx-tracing-ktx = { module = "androidx.tracing:tracing-ktx", version.ref = 
 
 # Icons
 androidx-compose-material-iconsExtended = { group = "androidx.compose.material", name = "material-icons-extended" }
+
+# KotlinX datetime
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

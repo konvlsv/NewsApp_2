@@ -95,4 +95,7 @@ dependencies {
 
     // Icons
     implementation(libs.androidx.compose.material.iconsExtended)
+
+    // KotlinX datetime
+    implementation(libs.kotlinx.datetime)
 }
