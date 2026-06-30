@@ -8,8 +8,8 @@ import android.net.NetworkCapabilities
 import android.net.NetworkRequest.Builder
 import androidx.core.content.getSystemService
 import androidx.tracing.trace
-import com.example.newsapp_2.hilt.AppDispatchers
-import com.example.newsapp_2.hilt.Dispatcher
+import com.example.newsapp_2.data.di.AppDispatchers
+import com.example.newsapp_2.data.di.Dispatcher
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.channels.awaitClose

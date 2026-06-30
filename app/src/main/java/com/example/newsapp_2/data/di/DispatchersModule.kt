@@ -1,4 +1,4 @@
-package com.example.newsapp_2.hilt
+package com.example.newsapp_2.data.di
 
 import dagger.Module
 import dagger.Provides
