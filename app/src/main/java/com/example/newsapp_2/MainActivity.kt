@@ -9,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.example.newsapp_2.data.util.NetworkMonitor
+import com.example.newsapp_2.data.util.TimeZoneMonitor
 import com.example.newsapp_2.ui.navigation.AppNavHost
 import com.example.newsapp_2.ui.common.theme.NewsApp_2Theme
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,6 +20,9 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var networkMonitor: NetworkMonitor
+
+    @Inject
+    lateinit var timeZoneMonitor: TimeZoneMonitor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
