@@ -75,6 +75,6 @@ class TimeZoneBroadcastMonitor @Inject constructor(
         .distinctUntilChanged() // пропускает новое значение только в том случае, если оно отличается от предыдущего
         .conflate() // удаляет промежуточные (старые) значения и оставляет только последнее.
         .flowOn(ioDispatcher) // перенос на фоновый поток (IO)
-        // превращает поток из Cold (холодного) в Hot (горячий) что экономит производительность
+        // превращает поток из Cold (холодного) в Hot (горячий)
         .shareIn(appScope, SharingStarted.WhileSubscribed(5_000), 1)
 }
